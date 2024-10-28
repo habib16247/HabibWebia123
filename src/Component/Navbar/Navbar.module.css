@@ -1,6 +1,6 @@
 @font-face {
     font-family: KumbhSans;
-    src: url("../assets/fonts/KumbhSans-Regular.ttf");
+    src: url("../../assets/fonts/KumbhSans-Regular.ttf");
 }
 
 
@@ -15,14 +15,32 @@
 .navbar {
     width: 100vw;
     height: 80px;
-    background-color: #28222255;
+    background-color: var(--yellow-theme-nav-background-color) 100%;
+    backdrop-filter: blur(10px);
+    box-shadow: 10px 5px 15px rgba(17, 25, 79, 0.306);
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: fixed;
+    top: 0;
     z-index: 20;
+    
+    transform: translateY(0);
+    transition: 0.5s all;
     backdrop-filter: blur(10px);
 }
+
+  
+  .navbar.compaq {
+    top: 0;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
+    top: 0;
+  }
+  
+  .navbar.hide {
+    transform: translateY(-120px);
+  }
 
 .logo img{
     width: clamp(150px, 20vw, 200px);
@@ -107,13 +125,23 @@
     font-family: KumbhSans;
     padding: 1rem;
     border-radius: 10px;
+    white-space: nowrap;
     cursor: pointer;
-    transition: all 0.6s ease;
 }
 
-.link:hover, .signAuthBtn:hover {
-    background: #63AB45;
-    color: #fff;
+.link::after, .signAuthBtn::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1.5px;
+    margin-top: 0.5rem;
+    background: transparent;
+    transition: all 0.4s ease;
+}
+
+.link:hover::after, .signAuthBtn:hover::after {
+    width: 110%;
+    background: var(--yellow-theme-main-color) 10%;
 }
 
 
@@ -149,7 +177,7 @@
 
 .authBtn {
     width: 180px;
-    height: 250px;
+    height: clamp(200px, 45vh, 650px);
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -158,16 +186,23 @@
     position: absolute;
     top: 5.1rem;
     right: 0;
-    background: #ffffff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    background: #0a1e23f2;
+    box-shadow: 0 0 10px rgba(31, 136, 159, 0.8);
 }
 
-
+.linksContent {
+    display: none;
+}
 
 @media (max-width: 888px) {
     .navContainer {
         width: 90vw;
         margin: auto;
+    }
+
+    .linksContent {
+        display: inline-block;
+        margin-right: 10px;
     }
 
     .hamburger {
@@ -178,23 +213,29 @@
 
     .navLinks {
         position: absolute;
-        top: 5.2rem;
+        top: 0rem;
         bottom: 0rem;
         left: 50%;
-        right: 0%;
+        right: 5%;
         backdrop-filter: blur(5px);
+        transition: all 0.8s ease !important;
     }
 
-    .links {
-        height: clamp(200px, 58vh, 950px);
+    .links, .authBtn {
+        width: fit-content;
+        height: fit-content + 2002px;
         flex-direction: column;
-        background: #0a1e2372;
+        background: #06021dd9;
         border-radius: 20px;
-        padding: 2rem;
-        box-shadow: 0 0 10px rgba(31, 136, 159, 0.4);
+        padding: 1rem;
+        border: 1px solid rgba(31, 136, 159, 0.9);
+        box-shadow: 0 0 10px rgba(31, 136, 159, 0.2);
         overflow: auto;
     }
     
+    .authBtn {
+        right: 3%;
+    }
     .links::-webkit-scrollbar {
         display: none;
     }
